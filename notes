@@ -1,0 +1,8 @@
+создать виртуальное окружение
+активировать его
+добавить пайтон
+скачать библиотеки
+django pillow psycopg2_binary django-environ django-cors-headers djangorestframework drf-spectacular django-unfold django-modeltranslation
+создать requirements.txt
+создать .env, .env.example, .gitignore, .dockerignore, Dockerfile, docker-compose.yml
+админка: nickname-admin1 / password-969

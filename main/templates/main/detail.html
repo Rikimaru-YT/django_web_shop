@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Detail
+{% endblock %}
+
+
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet"
+      href="https://mini-io-api.texnomart.uz/catalog/product/3595/359503/214429/f50bf031-7989-45fa-a69d-1c8391fffd89.webp" class="card-img-top" alt="..." style="height: 200px"/>
+
+<style>
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    .swiper {
+      width: 100%;
+      height: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .swiper-slide {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .mySwiper2 {
+      height: 80%;
+      width: 100%;
+    }
+
+    .mySwiper {
+      height: 20%;
+      box-sizing: border-box;
+      padding: 10px 0;
+    }
+
+    .mySwiper .swiper-slide {
+      width: 25%;
+      height: 100%;
+      opacity: 0.4;
+    }
+
+    .mySwiper .swiper-slide-thumb-active {
+      opacity: 1;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">{% include './components/_article-slider.html' %}</div>
+        <div class="col-6">
+            <h1 class="text-center mb-4">{{ article_detail.name }}</h1>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <b>Категория: </b>{{ article_detail.category.name }}
+                </li>
+                <li class="list-group-item">
+                    <b>Создано в: </b>{{ article_detail.created_at }}
+                </li>
+                <li class="list-group-item">
+                    <b>Кол-во лайков: </b>{{ article_detail.likes.user.count }}
+                </li>
+                <li class="list-group-item">
+                    <b>Кол-во комментариев: </b>{{ article_detail.comments.count }}
+                </li>
+            </ul>
+
+            {% if request.user.is_authenticated and request.user != article_detail.user %}
+            <a href="{% url 'add-vote' article_detail.id 'add_like' %}"
+               class="btn btn-outline-success {% if user in article_detail.likes.user.all %}active{% endif %}">Like</a>
+            {% elif request.user == article_detail.user %}
+            <a href="{% url 'update-article' article_detail.pk %}" class="btn btn-outline-success">Изменить</a>
+            <a href="{% url 'delete-article' article_detail.pk %}" class="btn btn-outline-danger">Удалить</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="my-5">
+        <h2 class="text-center mb-4">Полное описание</h2>
+        <p class="text-center">{{ article_detail.full_description }}</p>
+    </div>
+
+    <section>
+        <h2 class="text-center mb-4">Комментарии</h2>
+        <div class="row row-gap-4 mb-4">
+            {% for comment in article_detail.comments.all %}
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        Quote
+                    </div>
+                    <div class="card-body">
+                        <figure>
+                            <blockquote class="blockquote">
+                                <p>{{ comment.content }}</p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer">
+                                {{ comment.user }}
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-success mt-4">отправить</button>
+        </form>
+        {% else %}
+        <p>Только авторизованные пользователи могут оставлять комментарии.</p>
+        {% endif %}
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_script %}
+<script src="https://s3.fortifai.uz/shop/moderation/partner-1346/1787131305-1783433655-galaxy-s26-ultra-features-colors-ambient-island-mo.jpg"></script>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      freeMode: true,
+      watchSlidesProgress: true,
+    });
+    var swiper2 = new Swiper(".mySwiper2", {
+      spaceBetween: 10,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      thumbs: {
+        swiper: swiper,
+      },
+    });
+</script>
+{% endblock %}

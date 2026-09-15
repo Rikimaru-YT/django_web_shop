@@ -1,0 +1,91 @@
+/* ==========================================
+   1. ГЛОБАЛЬНЫЕ СТИЛИ И ШРИФТЫ
+   ========================================== */
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f8f9fa; /* Мягкий светлый фон для всего сайта */
+    color: #333333;
+}
+
+/* Красивый плавный переход при наведении на любые ссылки и кнопки */
+a, button {
+    transition: all 0.3s ease;
+}
+
+/* ==========================================
+   2. СТИЛИЗАЦИЯ НАВИГАЦИИ (NAVBAR)
+   ========================================== */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Легкая тень под меню */
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   3. НАСТРОЙКА СЛАЙДЕРА (CAROUSEL)
+   ========================================== */
+.carousel {
+    border-radius: 12px; /* Скругленные углы у баннера */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.carousel-item img {
+    height: 400px; /* Фиксированная высота слайдера, чтобы картинки не ломали верстку */
+    object-fit: cover; /* Картинка автоматически подстроится и заполнит блок без искажений */
+    background-color: #eaeaea;
+}
+
+/* ==========================================
+   4. КАРТОЧКИ ТОВАРОВ (CARDS)
+   ========================================== */
+.card {
+    border: none; /* Убираем стандартную грубую рамку Bootstrap */
+    border-radius: 10px; /* Делаем углы карточек более мягкими */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Эффект легкого приподнимания карточки при наведении мыши */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* ==========================================
+   5. ПАГИНАЦИЯ И КНОПКИ
+   ========================================== */
+.page-link {
+    color: #212529;
+    border-radius: 6px;
+    margin: 0 3px;
+}
+
+.page-item.active .page-link {
+    background-color: #212529; /* Делаем активную страницу темной под стиль меню */
+    border-color: #212529;
+}
+
+.btn-primary {
+    background-color: #0d6efd;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}

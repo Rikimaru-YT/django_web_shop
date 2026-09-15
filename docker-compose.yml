@@ -1,0 +1,50 @@
+services:
+  django_web_shop:
+    build: .
+    container_name: web_shop_a
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - web_shop_db
+
+    command: >  
+      sh -c "
+      python manage.py makemigrations &&
+      python manage.py migrate && 
+      python manage.py runserver 0.0.0.0:8000
+      "
+
+
+  web_shop_db:
+    image: postgres:16-alpine
+    container_name: web_shop_db_a
+    env_file: ./.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+
+volumes:
+  pg_data:
+
+
+# docker compose down -v
+#создать таблицы Category, Tag, Brand
+# Category:  name, photo, created_at, updated_at
+# Tag:  name, created_at, updated_at
+# Brand:  name, created_at, updated_at
+
+#зарегистрировать таблицы в admin.py
+# сделать миграции
+
+
+# docker compose run --rm django_waggy python manage.py makemigrations main
+# docker compose run --rm django_waggy python manage.py migrate
+
