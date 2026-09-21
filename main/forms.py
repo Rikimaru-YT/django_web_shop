@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactMessage
+from .models import ContactMessage, ProductComment
 
 
 class ContactMessageForm(forms.ModelForm):
@@ -22,4 +22,12 @@ class ContactMessageForm(forms.ModelForm):
             'message': forms.Textarea(attrs={
                 'class': 'form-control ps-3'
             })
+        }
+
+class ProductCommentForm(forms.ModelForm):
+    class Meta:
+        model = ProductComment
+        fields = ['review']
+        widgets = {
+            'review': forms.Textarea(attrs={'class': 'form-control ps-3'}),
         }

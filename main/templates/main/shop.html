@@ -42,48 +42,35 @@ Shop
             </div>
           </div>
 
-          <div class="product-grid row ">
+          <div class="row g-4 product-grid">
             {% for product in products %}
             <div class="col-md-4 my-4">
-              <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-                New
-              </div> -->
-              <div class="card position-relative">
-                <a href="single-product.html"><img src="images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
+                <div class="card position-relative">
+
+                <a href="{% url 'detail' product.id %}">
+                    <img src="/media/main/products/previews/item8.jfif" class="img-fluid rounded-4" alt="image">
+                </a>
+
                 <div class="card-body p-0">
-                  <a href="single-product.html">
                     <h3 class="card-title pt-4 m-0">{{ product.title }}</h3>
-                  </a>
-
+                </div>
                   <div class="card-text">
-                    <span class="rating secondary-font">
-                      <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                      <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                      <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                      <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                      <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                      5.0</span>
-
                     <h3 class="secondary-font text-primary">${{ product.price }}</h3>
 
                     <div class="d-flex flex-wrap mt-3">
                       <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
                         <h5 class="text-uppercase m-0">Add to Cart</h5>
                       </a>
-                      <a href="#" class="btn-wishlist px-4 pt-3 ">
+                      <a href="{% url 'favorites' %}" class="btn-favorites px-4 pt-3 ">
                         <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
                       </a>
                     </div>
-
-
                   </div>
-
                 </div>
-              </div>
             </div>
             {% endfor %}
           </div>
-          <!-- / product-grid -->
+
 
           <nav class="navigation paging-navigation text-center mt-5" role="navigation">
             <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
@@ -151,19 +138,19 @@ Shop
               <h4 class="widget-titlewidget-title">Filter By Price</h4>
               <ul class="product-tags sidebar-list list-unstyled">
                 <li class="tags-item">
-                  <a href="#" class="nav-link">Less than $10</a>
+                  <a href="#" class="nav-link">Less than $1000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">$10- $20</a>
+                  <a href="#" class="nav-link">$1000- $2000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">$20- $30</a>
+                  <a href="#" class="nav-link">$2000- $3000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">$30- $40</a>
+                  <a href="#" class="nav-link">$3000- $4000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">$40- $50</a>
+                  <a href="#" class="nav-link">$4000- $5000</a>
                 </li>
               </ul>
             </div>

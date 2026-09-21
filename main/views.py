@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
-from .forms import ContactMessageForm
-from .models import FAQ, Category, Tag, Brand, Product
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.defaultfilters import title
+from .forms import ContactMessageForm, ProductCommentForm
+from .models import Category, Tag, Brand, Product
+from django.db.models import Q
 
 def home_page(request):
-    return render(request, 'main/index.html')
+    products = Product.objects.all()
+    context = {
+        'products': products,
+    }
+    return render(request, 'main/index.html', context)
 
 
 def shop_page(request):
@@ -12,12 +17,16 @@ def shop_page(request):
     tags = Tag.objects.all()
     brands = Brand.objects.all()
     products = Product.objects.all()
+    search_query = request.GET.get('q')
+    if search_query:
+        products = products.filter(name__icontains=search_query)
 
     context = {
         'tags': tags,
         'brands': brands,
         'categories': categories,
         'products': products,
+        'search_query': search_query,
     }
     return render(request, 'main/shop.html', context)
 
@@ -36,17 +45,40 @@ def contacts_page(request):
     }
     return render(request, 'main/contacts.html', context)
 
-def detail_page(request):
-    return render(request, 'main/detail.html')
 
-def cart_page(request):
-    return render(request, 'main/cart.html')
+def show_product_detail(request, product_id):
+    product_detail = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductCommentForm(data=request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.product = product_detail
+            form.user = request.user
+            form.save()
+            return redirect('detail')
+    else:
+        form = ProductCommentForm()
+
+    context = {
+        'product_detail': product_detail,
+        'form': form
+    }
+    return render(request, 'main/detail.html', context)
 
 
+def search(request):
+    query = request.GET.get('q')
 
-"""
-на странице shop вывести из базы данных
-все категории
-все теги
-и все бренды
-"""
+    if query:
+        products = Product.objects.filter(
+            Q(title__icontains=query) | Q(short_description__icontains=query) | Q(full_description__icontains=query)
+
+        )
+    else:
+        products = Product.objects.all()
+
+    context = {
+        'products': products,
+    }
+    return render(request, 'main/search.html', context)
+

@@ -60,12 +60,6 @@ class ContactMessage(models.Model):
 
 
 
-# Product for cat
-# product-for-cat
-# Товар для собак
-# tovar-dlya-sobak
-
-
 class Product(models.Model):
     class ProductStatus(models.TextChoices):
         NEW = 'new', 'Новинка'
@@ -73,7 +67,6 @@ class Product(models.Model):
         SOLD = 'sold', 'Продано'
 
     title = models.CharField(max_length=100, verbose_name='Название', unique=True)
-    slug = models.SlugField(max_length=110, unique=True, verbose_name='Слаг')
     short_description = models.TextField(max_length=200, verbose_name='Краткое описание')
     full_description = models.TextField(verbose_name='Полное описание', null=True, blank=True)
     preview = models.ImageField(upload_to='main/products/previews/', null=True, blank=True, verbose_name='Фото')
@@ -86,6 +79,8 @@ class Product(models.Model):
     tag = models.ManyToManyField(Tag, verbose_name='Теги')
     brand = models.ManyToManyField(Brand, verbose_name='Бренды')
     sku = models.CharField(max_length=6, unique=True)
+    created_at = models.DateTimeField(verbose_name='дата создания')
+
 
     def __str__(self):
         return self.title
@@ -105,17 +100,8 @@ class ProductImage(models.Model):
 
 class ProductComment(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт', related_name='comments')
-    user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Пользователь',
-                             related_name='user_comments')
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, verbose_name='Пользователь', related_name='user_comments')
     review = models.TextField(verbose_name='Текст')
-    class ProductRatingChoices(models.IntegerChoices):
-        ONE = 1
-        TWO = 2
-        THREE = 3
-        FOUR = 4
-        FIVE = 5
-
-    rating = models.IntegerField(choices=ProductRatingChoices.choices, verbose_name='Рейтинг', default=0)
 
     def __str__(self):
         return self.product.title
@@ -125,14 +111,17 @@ class ProductComment(models.Model):
         verbose_name_plural = 'Комментарии продукта'
 
 
-"""
-Создать таблицы ProductImage, ProductComment
+class HomeSlider(models.Model):
+    image = models.ImageField(upload_to='home-page/slider/', verbose_name='Фото')
 
-ProductComment
-product
-user
-review
-rating = models.IntegerField()
-ProductRatingChoices(models.IntegerChoices)
+    class Meta:
+        verbose_name = 'Фото слайдера'
+        verbose_name_plural = 'Фотки слайдера'
 
-"""
+
+
+
+
+
+
+

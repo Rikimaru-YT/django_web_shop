@@ -1,8 +1,8 @@
 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
     <div class="swiper-wrapper">
-        {% for article_image in article_images %}
+        {% for product_image in product_images %}
         <div class="swiper-slide">
-            <img src="{{ article_image.image.url }}"/>
+            <img src="{{ product_image.image.url }}"/>
         </div>
         {% endfor %}
     </div>
@@ -11,9 +11,9 @@
 </div>
 <div thumbsSlider="" class="swiper mySwiper">
     <div class="swiper-wrapper">
-        {% for article_image in article_images %}
+        {% for product_image in product_images %}
         <div class="swiper-slide">
-            <img src="{{ article_image.image.url }}"/>
+            <img src="{{ product_image.image.url }}"/>
         </div>
         {% endfor %}
     </div>

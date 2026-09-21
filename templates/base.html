@@ -116,28 +116,28 @@
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">Grey Hoodie</h6>
+                        <h6 class="my-0">Samsung Galaxy S26 Ultra</h6>
                         <small class="text-body-secondary">Brief description</small>
                     </div>
-                    <span class="text-body-secondary">$12</span>
+                    <span class="text-body-secondary">$1500</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">Dog Food</h6>
+                        <h6 class="my-0">Samsung Galaxy Watch 8</h6>
                         <small class="text-body-secondary">Brief description</small>
                     </div>
-                    <span class="text-body-secondary">$8</span>
+                    <span class="text-body-secondary">$300</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
-                        <h6 class="my-0">Soft Toy</h6>
+                        <h6 class="my-0">Samsung Galaxy Z Fold 7 </h6>
                         <small class="text-body-secondary">Brief description</small>
                     </div>
-                    <span class="text-body-secondary">$5</span>
+                    <span class="text-body-secondary">$2000</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span class="fw-bold">Total (USD)</span>
-                    <strong>$20</strong>
+                    <strong>$3800</strong>
                 </li>
             </ul>
 
@@ -157,12 +157,14 @@
             <h4 class="text-primary text-uppercase mb-3">
                 Search
             </h4>
+
             <div class="search-bar border rounded-2 border-dark-subtle">
                 <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
                     <input type="text" class="form-control border-0 bg-transparent" placeholder="Search Here"/>
                     <iconify-icon icon="tabler:search" class="fs-4 me-3"></iconify-icon>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
@@ -174,36 +176,21 @@
             <div class="col-sm-4 col-lg-3 text-center text-sm-start">
                 <div class="main-logo">
                     <a href="{% url 'home' %}">
-                        <img src="{% static 'images/logo.png' %}" alt="logo" class="img-fluid">
+                        <img src="{% static 'images/Samsung_home-page.jpg' %}" alt="logo" class="img-fluid">
                     </a>
                 </div>
             </div>
 
             <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-5 d-none d-lg-block">
                 <div class="search-bar border rounded-2 px-3 border-dark-subtle">
-                    <form id="search-form" class="text-center d-flex align-items-center" action="" method="">
-                        <input type="text" class="form-control border-0 bg-transparent"
-                               placeholder="Search for more than 10,000 products"/>
+                    <form id="search-form" class="text-center d-flex align-items-center" action="{% url 'search' %}" method="GET">
+                        <input type="text" name="q" class="form-control border-0 bg-transparent" placeholder="Search" value="{{ request.GET.q }}"/>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor"
                                   d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z"/>
                         </svg>
                     </form>
                 </div>
-            </div>
-
-            <div
-                    class="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-                <div class="support-box text-end d-none d-xl-block">
-                    <span class="fs-6 secondary-font text-muted">Phone</span>
-                    <h5 class="mb-0">+980-34984089</h5>
-                </div>
-                <div class="support-box text-end d-none d-xl-block">
-                    <span class="fs-6 secondary-font text-muted">Email</span>
-                    <h5 class="mb-0">waggy@gmail.com</h5>
-                </div>
-
-
             </div>
         </div>
     </div>
@@ -223,7 +210,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="wishlist.html" class="mx-3">
+                        <a href="favorites.html" class="mx-3">
                             <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                         </a>
                     </li>
@@ -239,7 +226,7 @@
                     </li>
 
                     <li>
-                        <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
+                        <a href="{% url 'search' %}" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
                            aria-controls="offcanvasSearch">
                             <iconify-icon icon="tabler:search" class="fs-4"></iconify-icon>
                             </span>
@@ -265,9 +252,9 @@
                     <select class="filter-categories border-0 mb-0 me-5">
                         <option>Shop by Category</option>
                         <option>Clothes</option>
+                        <option>Technology</option>
+                        <option>food</option>
                         <option>Food</option>
-                        <option>Food</option>
-                        <option>Toy</option>
                     </select>
 
                     <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-3 mb-0">
@@ -275,48 +262,46 @@
                             <a href="{% url 'home' %}" class="nav-link active">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'about' %}" class="nav-link">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{% url 'faqs' %}" class="nav-link">FAQs</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{% url 'shop' %}" class="nav-link">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'blog' %}" class="nav-link">Blog</a>
+                            <a href="{% url 'home' %}" class="nav-link">Detail</a>
                         </li>
                         <li class="nav-item">
                             <a href="{% url 'contacts' %}" class="nav-link">Contact</a>
+                        </li>
+                         <li class="nav-item">
+                            <a href="{% url 'cart' %}" class="nav-link">Cart</a>
                         </li>
                     </ul>
 
                     <div class="d-none d-lg-flex align-items-end">
                         <ul class="d-flex justify-content-end list-unstyled m-0">
-                            <li>
                                 {% if not request.user.is_authenticated %}
-                                <a href="{% url 'auth-page' %}" class="mx-3">
+                            <li>
+                                <a href="{% url 'auth' %}" class="mx-3">
                                     <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
                                 </a>
+                             </li>
                                 {% else %}
-                                <a href="{% url 'logout' %}" class="mx-3">
-                                    Logout
-                                </a>
-                                {% endif %}
-                            </li>
                             <li>
-                                <a href="wishlist.html" class="mx-3">
+                                 <a href="{% url 'logout' %}" class="mx-3">Logout</a>
+                                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
+                            </li>
+
+                            <li>
+                                 <a href="{% url 'favorites' %}" class="mx-3">
                                     <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                                 </a>
                             </li>
+                            {% endif %}
+
 
                             <li class="">
                                 <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
                                    aria-controls="offcanvasCart">
                                     <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      03
-                    </span>
+                                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">03</span>
                                 </a>
                             </li>
                         </ul>
@@ -332,68 +317,18 @@
 
     </div>
 </header>
+
+
 {% block content %}
 {% endblock %}
 
-<section id="insta" class="my-5">
-    <div class="row g-0 py-5">
-        <div class="col instagram-item  text-center position-relative">
-            <div class="icon-overlay d-flex justify-content-center position-absolute">
-                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-            </div>
-            <a href="#">
-                <img src="images/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">
-            </a>
-        </div>
-        <div class="col instagram-item  text-center position-relative">
-            <div class="icon-overlay d-flex justify-content-center position-absolute">
-                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-            </div>
-            <a href="#">
-                <img src="images/insta2.jpg" alt="insta-img" class="img-fluid rounded-3">
-            </a>
-        </div>
-        <div class="col instagram-item  text-center position-relative">
-            <div class="icon-overlay d-flex justify-content-center position-absolute">
-                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-            </div>
-            <a href="#">
-                <img src="images/insta3.jpg" alt="insta-img" class="img-fluid rounded-3">
-            </a>
-        </div>
-        <div class="col instagram-item  text-center position-relative">
-            <div class="icon-overlay d-flex justify-content-center position-absolute">
-                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-            </div>
-            <a href="#">
-                <img src="images/insta4.jpg" alt="insta-img" class="img-fluid rounded-3">
-            </a>
-        </div>
-        <div class="col instagram-item  text-center position-relative">
-            <div class="icon-overlay d-flex justify-content-center position-absolute">
-                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-            </div>
-            <a href="#">
-                <img src="images/insta5.jpg" alt="insta-img" class="img-fluid rounded-3">
-            </a>
-        </div>
-        <div class="col instagram-item  text-center position-relative">
-            <div class="icon-overlay d-flex justify-content-center position-absolute">
-                <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-            </div>
-            <a href="#">
-                <img src="images/insta6.jpg" alt="insta-img" class="img-fluid rounded-3">
-            </a>
-        </div>
-    </div>
-</section>
 
 <footer id="footer" class="my-5">
     <div class="container py-5 my-5">
         <div class="row">
             <div class="col-md-3">
                 <div class="footer-menu">
-                    <img src="images/logo.png" alt="logo">
+                    <img src="{% static 'images/logo.jpg' %}" alt="logo" class="img-fluid">
                     <p class="blog-paragraph fs-6 mt-3">Subscribe to our newsletter to get updates about our grand
                         offers.</p>
                     <div class="social-links">
@@ -436,13 +371,13 @@
                             <a href="#" class="nav-link">Home</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link">About us</a>
+                            <a href="#" class="nav-link">Shop</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link">Offer </a>
+                            <a href="#" class="nav-link">Detail </a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link">Services</a>
+                            <a href="#" class="nav-link">Cart</a>
                         </li>
                         <li class="menu-item">
                             <a href="#" class="nav-link">Conatct Us</a>
@@ -496,7 +431,7 @@
         <hr class="m-0">
         <div class="row mt-3">
             <div class="col-md-6 copyright">
-                <p class="secondary-font">© 2023 Waggy. All rights reserved.</p>
+                <p class="secondary-font">© 2026 WebShop. All rights reserved.</p>
             </div>
             <div class="col-md-6 text-md-end">
                 <p class="secondary-font">Free HTML Template by <a href="https://templatesjungle.com/" target="_blank"
