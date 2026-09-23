@@ -75,25 +75,31 @@ Contacts
                     <h2 class="text-dark">Get in Touch</h2>
                     <p>Use the form below to get in touch with us.</p>
                     <form id="form" class="form-group flex-wrap" method="post">
-                        {% csrf_token %}
-                        <div class="form-input col-lg-12 d-flex mb-3">
-                            {{ form.name }}
-                            {{ form.email }}
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            {{ form.number }}
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            {{ form.subject }}
-                        </div>
-                        <div class="col-lg-12 mb-3">
-                            {{ form.message }}
-                        </div>
-                        <div class="d-grid">
-                            <button class="btn btn-dark btn-lg rounded-1">Submit</button>
-                        </div>
+                    {% csrf_token %}
+                        <div class="row mb-3">
+                        <div class="col-lg-6 col-md-6 mb-3 mb-md-0">
+                    {{ form.name }}
+                       </div>
+            <div class="col-lg-6 col-md-6">
+                    {{ form.email }}
+            </div>
+                       </div>
+                 <div class="col-lg-12 mb-3 px-0">
+                    {{ form.number }}
+                 </div>
+            <div class="col-lg-12 mb-3 px-0">
+                    {{ form.number }}
+            </div>
+            <div class="col-lg-12 mb-3 px-0">
+                    {{ form.subject }}
+            </div>
+            <div class="col-lg-12 mb-3 px-0">
+                    {{ form.message }}
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-dark btn-lg rounded-1" type="submit">Submit</button>
+            </div>
                     </form>
-
                 </div>
             </div>
         </div>
